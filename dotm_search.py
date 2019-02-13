@@ -7,8 +7,10 @@ within the 'word/document.xml' section of a MSWord .dotm file.
 """
 __author__ = "jayaimzzz"
 
+import re
 import os
 from zipfile import ZipFile
+from lxml import etree
 
 def main():
     path = "./dotm_files/"
@@ -18,8 +20,12 @@ def main():
             print file
             with ZipFile(path + file, "r") as zip:
                 # zip.printdir()
-                data = zip.read("word/document.xml")
-                print data
+                print zip.
+                # print dir(zip)
+                # text_start_tag_locations = [l.start() for l in re.finditer("</w:t>", xml)]
+                # i = xml.find("<w:t>")
+                # print text_start_tag_locations
+                # print xml
     
 
 if __name__ == '__main__':
