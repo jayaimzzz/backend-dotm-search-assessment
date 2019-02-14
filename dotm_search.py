@@ -19,6 +19,7 @@ def main(directory, search_text):
     files = os.listdir(path)
     files_matched = 0
     files_searched = 0
+    len_of_search_text = len(search_text)
     print "Searching director {} for text '{}' ...".format(path,search_text)
     for fil in files:
         if fil.endswith("dotm"):
@@ -31,8 +32,8 @@ def main(directory, search_text):
                             files_matched += 1
                             print "Match found in file {}{}".format(path,fil)
                             len1 = len(text)
-                            for i, c in enumerate(text):
-                                if c == search_text:
+                            for i in range(len1):
+                                if text[i:i + len_of_search_text] == search_text:
                                     start_i = 0 if i < 40 else i - 40
                                     end_i = len1 if i + 40 > len1 else i + 40
                                     print "   ...{}...".format(text[start_i:end_i])
