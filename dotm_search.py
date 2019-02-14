@@ -13,8 +13,10 @@ from zipfile import ZipFile
 from lxml import etree
 import argparse
 import sys
+import time
 
 def main(directory, search_text):
+    t0 = time.time()
     path = directory + "/" if directory != None else "./"
     files = os.listdir(path)
     files_matched = 0
@@ -39,6 +41,8 @@ def main(directory, search_text):
                                     print "   ...{}...".format(text[start_i:end_i])
     print "Total dotm files searched: {}".format(files_searched)
     print "Total dotm files matched: {}".format(files_matched)
+    t1 = time.time()
+    print "Total time: {}".format(t1-t0)
 
 if __name__ == '__main__':
     """Search a directory of dotm files for text"""
