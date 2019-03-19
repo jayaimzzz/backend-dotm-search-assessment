@@ -10,7 +10,6 @@ __author__ = "jayaimzzz"
 import re
 import os
 from zipfile import ZipFile
-from lxml import etree
 import argparse
 import sys
 import time
