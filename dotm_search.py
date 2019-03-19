@@ -27,16 +27,17 @@ def main(directory, search_text):
         if fil.endswith("dotm"):
             files_searched += 1
             with ZipFile(path + fil, "r") as zip:
-                text = zip.read("word/document.xml")
-                if search_text in text:
-                    files_matched += 1
-                    print "Match found in file {}{}".format(path,fil)
-                    len1 = len(text)
-                    for i in range(len1):                           
-                         if text[i:i + len_of_search_text] == search_text:
-                            start_i = 0 if i < 40 else i - 40
-                            end_i = len1 if i + 40 + len_of_search_text > len1 else i + 40 + len_of_search_text
-                            print "   ...{}...".format(text[start_i:end_i])
+                with zip.open("word/document.xml", "r") as opened:
+                    for text in opened:
+                        if search_text in text:
+                            files_matched += 1
+                            print "Match found in file {}{}".format(path,fil)
+                            len1 = len(text)
+                            for i in range(len1):                           
+                                if text[i:i + len_of_search_text] == search_text:
+                                    start_i = 0 if i < 40 else i - 40
+                                    end_i = len1 if i + 40 + len_of_search_text > len1 else i + 40 + len_of_search_text
+                                    print "   ...{}...".format(text[start_i:end_i])
     print "Total dotm files searched: {}".format(files_searched)
     print "Total dotm files matched: {}".format(files_matched)
     # t1 = time.time()
